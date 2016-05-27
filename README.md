@@ -6,7 +6,7 @@
 cd ~/Documents/ros/src
 git clone https://github.com/BlueWhaleRobot/startup.git
 ```   
-###Install this service into system ,service name is starup
+###Install this service into system ,service name is startup
 ```
 rosrun robot_upstart install startup/launch/startup.launch
 ```
@@ -26,7 +26,7 @@ sudo service startup stop
     
     
     小强的开机任务包，安装这个软件包后，小强每次启动都会自动运行本软件包中的luanch文件
-##使用方法
+##使用方法:
 ###首先将软件包下载到小强ROS工作目录
 ```
 cd ~/Documents/ros/src
