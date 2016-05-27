@@ -5,6 +5,8 @@
 ```
 cd ~/Documents/ros/src
 git clone https://github.com/BlueWhaleRobot/startup.git
+cd ..
+catkin_make
 ```   
 ###Install this service into system, service name is startup
 ```
@@ -31,6 +33,8 @@ sudo service startup stop
 ```
 cd ~/Documents/ros/src
 git clone https://github.com/BlueWhaleRobot/startup.git
+cd ..
+catkin_make
 ```   
 ###将软件包中的startup服务注册到系统
 ```
