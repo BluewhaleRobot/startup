@@ -1,12 +1,12 @@
 # startup
     xiaoqiang Ubuntu startup service  which launch groups of roslaunch files
 ##Usage:
-###download to  xiaoqiang ros workspace
+###download to xiaoqiang ros workspace
 ```
 cd ~/Documents/ros/src
 git clone https://github.com/BlueWhaleRobot/startup.git
 ```   
-###Install this service into system ,service name is startup
+###Install this service into system, service name is startup
 ```
 rosrun robot_upstart install startup/launch/startup.launch
 ```
