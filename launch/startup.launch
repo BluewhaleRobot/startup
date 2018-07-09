@@ -24,7 +24,7 @@
     <remap from="/xqserial_server" to="/motor_driver" />
   </node>
   <node pkg="web_video_server" type="web_video_server" name="web_video_server"></node>
-  <include file="$(find xiaoqiang_audio_controller)/launch/audio_controller.launch"/>
+  <!-- <include file="$(find xiaoqiang_audio_controller)/launch/audio_controller.launch"/> -->
   <!-- <node pkg="nav_test" type="kinect_keepalive.py" name="kinect_keeplive"></node> -->
   <!-- <include file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" /> -->
   <!-- <include file="$(find rplidar_ros)/launch/rplidar_nav.launch" /> -->
