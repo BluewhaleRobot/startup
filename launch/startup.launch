@@ -11,7 +11,7 @@
   -->
   <include file="$(find xiaoqiang_udrf)/launch/xiaoqiang_udrf.launch" />
   <include file="$(find xqserial_server)/launch/xqserial.launch" />
-  <include file="$(find galileo_serial_server)/launch/galileoSerialServer.launch" />
+  <include file="$(find galileo_serial_server)/launch/galileo_serial_server.launch" />
   <include file="$(find usb_cam)/launch/ov2610.launch" />
   <node pkg="system_monitor" type="monitor.py" name="system_monitor">
     <remap from="/usb_cam" to="/camera_node" />
