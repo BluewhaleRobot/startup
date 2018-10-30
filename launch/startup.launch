@@ -1,5 +1,4 @@
 <launch>
-  <env name="ROS_IP" value="192.168.1.100"/>
   <!--
       xiaoqiang start up launch file
       check motor status
