@@ -3,12 +3,14 @@
   <include file="$(find xqserial_server)/launch/xqserial.launch" />
   <include file="$(find galileo_serial_server)/launch/galileo_serial_server.launch" />
   <include file="$(find usb_cam)/launch/ov2610.launch" />
+  <!-- <include file="$(find rplidar_ros)/launch/rplidar.launch" /> -->
+  <node pkg="rplidar_ros" type="node_controller.py" name="rplidar_manager" output="screen"/>
   <node pkg="system_monitor" type="monitor.py" name="system_monitor" respawn="true" respawn_delay="10">
     <remap from="/usb_cam" to="/camera_node" />
     <remap from="/usb_cam/image_raw" to="/camera_node/image_raw" />
     <remap from="/xqserial_server" to="/motor_driver" />
   </node>
-  <node pkg="system_monitor" type="remote_server.py" name="remote_server" respawn="true" respawn_delay="10" output="screen">
+  <node pkg="system_monitor" type="remote_server.py" name="remote_server" respawn="false" respawn_delay="10" output="screen">
     <remap from="/usb_cam" to="/camera_node" />
     <remap from="/usb_cam/image_raw" to="/camera_node/image_raw" />
     <remap from="/xqserial_server" to="/motor_driver" />
