@@ -1,8 +1,8 @@
 <launch>
   <include file="$(find xiaoqiang_udrf)/launch/xiaoqiang_udrf.launch" />
   <include file="$(find xqserial_server)/launch/xqserial.launch" />
-  <include file="$(find galileo_serial_server)/launch/galileo_serial_server.launch" />
-  <include file="$(find usb_cam)/launch/ov2610.launch" />
+  <!--<include file="$(find galileo_serial_server)/launch/galileo_serial_server.launch" /> -->
+  <!-- <include file="$(find usb_cam)/launch/ov2610.launch" /> -->
   <node pkg="system_monitor" type="monitor.py" name="system_monitor" respawn="true" respawn_delay="10">
     <remap from="/usb_cam" to="/camera_node" />
     <remap from="/usb_cam/camera_info" to="/camera_node/camera_info" />
@@ -17,8 +17,8 @@
   </node>
   <node pkg="system_monitor" type="broadcast_server.py" name="broadcast_server" respawn="true" respawn_delay="10"/>
   <node pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true" respawn_delay="10"></node>
-  <include file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch" />
-  <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
+  <!-- <include file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch" /> -->
+  <!-- <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" /> -->
   <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch" />
   <param name="xiaoqiang_logger_node/server_url" value="http://robot-log.bwbot.org" />
   <node pkg="system_monitor" type="system_logger_node.py" name="galileo_logger" respawn="true" respawn_delay="10"/>
