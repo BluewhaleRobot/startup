@@ -18,6 +18,7 @@
     <remap from="/xqserial_server" to="/motor_driver" />
   </node>
   <node pkg="system_monitor" type="broadcast_server.py" name="broadcast_server" respawn="true" respawn_delay="10"/>
+  <node pkg="system_monitor" type="status_audio_reporter.py" name="audio_report" respawn="true" respawn_delay="10"/>
   <node pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true" respawn_delay="10"></node>
   <include file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch" />
   <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
