@@ -25,6 +25,7 @@
   <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch" />
   <param name="xiaoqiang_logger_node/server_url" value="http://robot-log.bwbot.org" />
   <node pkg="system_monitor" type="system_logger_node.py" name="galileo_logger" respawn="true" respawn_delay="10"/>
+  <include file="$(find xiaoqiang_greeting)/launch/xiaoqiang_greeting.launch" />
   <!-- <include file="$(find xiaoqiang_audio_controller)/launch/audio_controller.launch"/> -->
   <!-- <node pkg="nav_test" type="kinect_keepalive.py" name="kinect_keeplive"></node> -->
   <!-- <include file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" /> -->
