@@ -25,6 +25,6 @@
   <!-- <include file="$(find xiaoqiang_audio_controller)/launch/audio_controller.launch"/> -->
   <!-- <node pkg="nav_test" type="kinect_keepalive.py" name="kinect_keeplive"></node> -->
   <!-- <include file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" /> -->
-  <!-- <include file="$(find rplidar_ros)/launch/rplidar_nav.launch" /> -->
+  <include file="$(find rplidar_ros)/launch/rplidar.launch" />
   <!-- <node pkg="cam_auto_brightness" type="auto_brightness.py" name="cam_auto_brightness_node"/> -->
 </launch>
