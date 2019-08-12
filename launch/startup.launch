@@ -4,7 +4,7 @@
   <include file="$(find galileo_serial_server)/launch/galileo_serial_server.launch" />
   <include file="$(find usb_cam)/launch/ov2610.launch" />
   <!-- <include file="$(find rplidar_ros)/launch/rplidar.launch" /> -->
-  <node pkg="rplidar_ros" type="node_controller.py" name="rplidar_manager" output="screen" respawn="true" respawn_delay="10" />
+  <node pkg="rplidar_ros" type="node_controller.py" name="rplidar_node__manager" output="screen" respawn="true" respawn_delay="10" />
   <node pkg="system_monitor" type="monitor.py" name="system_monitor" respawn="true" respawn_delay="10">
     <remap from="/usb_cam" to="/camera_node" />
     <remap from="/usb_cam/camera_info" to="/camera_node/camera_info" />
