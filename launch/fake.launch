@@ -21,4 +21,5 @@
   <node pkg="system_monitor" type="galileo_status_relay" name="galileo_status_relay" respawn="true" respawn_delay="10" output="screen">
     <remap from="~galileo/status" to="/remote_server/galileo/status" />
   </node>
+  <include file="$(find bw_auto_dock)/launch/fake.launch" />
 </launch>
