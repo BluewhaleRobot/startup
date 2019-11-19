@@ -3,6 +3,7 @@
   <include file="$(find xqserial_server)/launch/xqserial.launch" />
   <!-- <include file="$(find galileo_serial_server)/launch/galileo_serial_server.launch" /> -->
   <include file="$(find usb_cam)/launch/multi.launch" />
+  <include file="$(find turtlebot_teleop)/launch/ps3fakexiaoqiang_teleop.launch" />
   <node pkg="topic_tools" type="relay" name="camera_node" args="/multi/front/image_raw /camera_node/image_raw" respawn="true" respawn_delay="10">
     <param name="lazy" value="true"/>
   </node>
@@ -22,6 +23,7 @@
     <remap from="/usb_cam/image_raw" to="/multi/front/image_raw" />
     <remap from="/xqserial_server" to="/motor_driver" />
   </node>
+  <node pkg="system_monitor" type="broadcast_server.py" name="broadcast_server" respawn="true" respawn_delay="10"/>
   <node pkg="system_monitor" type="status_audio_reporter.py" name="audio_report" respawn="true" respawn_delay="10"/>
   <node pkg="system_monitor" type="galileo_status_relay" name="galileo_status_relay" respawn="true" respawn_delay="10" output="screen">
     <remap from="~galileo/status" to="/remote_server/galileo/status" />
@@ -29,14 +31,14 @@
   <node pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true" respawn_delay="10">
     <remap from="/camera_node/image_raw" to="/multi/front/image_raw" />
   </node>
-  <include file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch" />
+  <!-- <include file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch" /> -->
   <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
   <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch" />
   <param name="xiaoqiang_logger_node/server_url" value="http://robot-log.bwbot.org" />
   <node pkg="system_monitor" type="system_logger_node.py" name="galileo_logger" respawn="true" respawn_delay="10"/>
   <include file="$(find xiaoqiang_greeting)/launch/xiaoqiang_greeting.launch" />
   <!-- <node pkg="system_monitor" type="iot_client.py" name="iot_client" respawn="true" respawn_delay="10" output="screen" /> -->
-  <include file="$(find galileo_api)/launch/start.launch" />
+  <!-- <include file="$(find galileo_api)/launch/start.launch" /> -->
   <!-- <include file="$(find xiaoqiang_audio_controller)/launch/audio_controller.launch"/> -->
   <!-- <node pkg="nav_test" type="kinect_keepalive.py" name="kinect_keeplive"></node> -->
   <!-- <include file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" /> -->
