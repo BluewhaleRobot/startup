@@ -23,6 +23,7 @@
     <remap from="/xqserial_server" to="/motor_driver" />
   </node>
   <node pkg="system_monitor" type="status_audio_reporter.py" name="audio_report" respawn="true" respawn_delay="10"/>
+  <node pkg="system_monitor" type="time_tasks.py" name="time_task" respawn="true" respawn_delay="10"/>
   <node pkg="system_monitor" type="galileo_status_relay" name="galileo_status_relay" respawn="true" respawn_delay="10" output="screen">
     <remap from="~galileo/status" to="/remote_server/galileo/status" />
   </node>
