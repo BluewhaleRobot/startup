@@ -1,0 +1,127 @@
+<!--
+@Author: randoms
+@Date:   2017-08-01
+@Email:  randoms@randoms.me
+@Project: galileo
+@Last modified by:   randoms
+@Last modified time: 2017-08-31
+@Copyright: ? 2015-2019 Blue Whale Technology all rights reserved
+-->
+
+
+
+<launch>
+
+  <arg name="code_name" default="xq4" />
+  <param name="/galileo/code_name" value="$(arg code_name)" />
+  <!-- battery low voltage, used to calculate battery percentage -->
+  <param name="/galileo/battery_low" type="double" value="10.8" />
+  <!-- battery high voltage -->
+  <param name="/galileo/battery_high" type="double" value="12" />
+  <!-- galileo api timeout in seconds -->
+  <param name="/galileo/timeout" type="int" value="20" />
+  <!-- galileo service udp broadcast port -->
+  <param name="/galileo/broadcast_port" type="int" value="22002"/>
+  <!-- image topic -->
+  <arg name="galileo_image_topic" default="/camera_node/image_raw" doc="galileo image raw"/>
+  <param name="/galileo/galileo_image_topic" type="string" value="$(arg galileo_image_topic)"/>
+  <!-- processed image topic -->
+  <arg name="galileo_image_topic_processed" default="/ORB_SLAM/Frame" doc="galileo image processed"/>
+  <param name="/galileo/galileo_image_topic_processed" type="string" value="$(arg galileo_image_topic_processed)"/>
+  <!-- mapping topic -->
+  <arg name="galileo_mapping_topic" default="/map_image/full" doc="galileo map image"/>
+  <param name="/galileo/galileo_mapping_topic" type="string" value="$(arg galileo_mapping_topic)"/>
+
+
+  <!-- galileo http server port -->
+  <arg name="service_port" default="3546" doc="galileo http server port"/>
+  <param name="/galileo/service_port" type="int" value="$(arg service_port)"/>
+  <!-- galileo web socket server port-->
+  <arg name="ws_service_port" default="3547" doc="galileo web socket server port"/>
+  <param name="/galileo/ws_service_port" type="int" value="$(arg ws_service_port)"/>
+
+  <!-- sharplink log file, used to get client id -->
+  <param name="/galileo/sharplink_log" type="str" value="/home/xiaoqiang/Documents/ros/devel/lib/sharplink/server.log" />
+  <param name="/galileo/setting_path" type="str" value="/home/xiaoqiang/Documents/ros/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/Data" />
+
+  <param name="/galileo/ros_package_path" type="str" value="$(env ROS_PACKAGE_PATH)" />
+
+  <param name="/galileo/map_path" type="str" value="/home/xiaoqiang/saved-slamdb" />
+  <param name="/galileo/map_workspace_path" type="str" value="/home/xiaoqiang/slamdb" />
+
+  <!-- update releated -->
+  <param name="/galileo/update_check_cmd" value="/home/xiaoqiang/Documents/ros/src/bwbotupdater/update.py $(arg code_name) check"/>
+  <param name="/galileo/update_cmd" value="/home/xiaoqiang/Documents/ros/src/bwbotupdater/update.py $(arg code_name)" />
+  <param name="/galileo/update_log_path"  value="/home/xiaoqiang/Documents/ros/src/bwbotupdater/update_log.txt" />
+  <param name="/galileo/update_flag_path" value="/home/xiaoqiang/Documents/ros/src/bwbotupdater/update_flag.json" />
+
+  <!-- schedule system related -->
+  <arg name="schedule_manager_ip" default="" />
+  <arg name="schedule_manager_service_port" default="24958" />
+  <arg name="schedule_manager_port" default="21177" />
+  <param name="/galileo/schedule_manager_ip" type="str" value="$(arg schedule_manager_ip)" />
+  <param name="/galileo/schedule_manager_service_port" type="int" value="$(arg schedule_manager_service_port)" />
+  <param name="/galileo/schedule_manager_port" type="int" value="$(arg schedule_manager_port)" />
+  
+
+  <node
+    pkg="galileo_api"
+    type="start.sh"
+    name="galileo_api"
+    args="start_galileo 0.0.0.0:$(arg service_port) --noreload"
+    output="screen">
+    <!-- basic video data input -->
+    <remap from="/galileo/camera/image_raw" to="$(arg galileo_image_topic)" />
+    <!-- processed video data input -->
+    <remap from="/galileo/camera/processed" to="$(arg galileo_image_topic_processed)" />
+    <!-- robot battery voltage -->
+    <remap from="/galileo/battery/power" to="/xqserial_server/Power" />
+    <!-- basic depth video data input -->
+    <remap from="/galileo/camera/depth" to="/ORB_SLAM/Frame" />
+    <!-- imu odometry -->
+    <remap from="/galileo/imu/odom" to="/xqserial_server/Odom" />
+    <!-- imu position -->
+    <remap from="/galileo/imu/pose_2d" to="/xqserial_server/Pose2D" />
+    <!-- map process running flag, used to check system status -->
+    <remap from="/galileo/map/running" to="/ORB_SLAM/Frame" />
+    <!-- odometry when mapping, a combination of visual odometry and imu -->
+    <remap from="/galileo/map/odom" to="/xqserial_server/Odom" />
+    <!-- current map of mapping -->
+    <remap from="/galileo/map/current_map" to="/map" />
+    <remap from="/galileo/map/current_map_meta" to="/map_metadata" />
+    <!-- map tracks -->
+    <remap from='/galileo/map/path' to='/fake_server/path' />
+    <!-- navigation process running flag, used to check system status -->
+    <remap from="/galileo/navigation/running" to="/ORB_SLAM/Frame" />
+    <!-- odometry when navigating, a combination of visual odometry and imu -->
+    <remap from='/galileo/navigation/odom' to="/xqserial_server/Odom" />
+    <!-- recharge process running flag, used to check system status -->
+    <remap from="/galileo/recharge/running" to="/ORB_SLAM/Frame" />
+    <!-- save map action server -->
+    <remap from="/galileo/map/save" to="/mono_mapSaver"/>
+    <!-- calibrate imu topic -->
+    <remap from="/galileo/calibate_imu" to="/imu_cal" />
+  </node>
+
+  <!-- Used for Debug -->
+<!--
+  <node
+    pkg="galileo"
+    type="fake_server.sh"
+    name="fake_map_server"
+    output="screen"
+    >
+  </node>
+
+  <node
+    pkg="map_server"
+    type="map_server"
+    name="fake_map_server1"
+    args="$(find galileo)/etc/map.yaml"
+    output="screen"
+    >
+  </node>
+-->
+
+
+</launch>
