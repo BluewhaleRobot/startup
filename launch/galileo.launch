@@ -15,7 +15,7 @@
   <arg name="code_name" default="chitu3_mihai" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
-  <param name="/galileo/battery_low" type="double" value="32.0" />
+  <param name="/galileo/battery_low" type="double" value="33.5" />
   <!-- battery high voltage -->
   <param name="/galileo/battery_high" type="double" value="39.0" />
   <!-- galileo api timeout in seconds -->
