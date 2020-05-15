@@ -17,11 +17,16 @@
   </node>
   <node pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true" respawn_delay="10"></node>
   <!-- <include file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch" /> -->
+  <node pkg="system_monitor" type="status_audio_reporter.py" name="audio_report" respawn="true" respawn_delay="10"/>
+  <node pkg="system_monitor" type="time_tasks.py" name="time_task" respawn="true" respawn_delay="10"/>
+  <node pkg="system_monitor" type="galileo_status_relay" name="galileo_status_relay" respawn="true" respawn_delay="10" output="screen">
+    <remap from="~galileo/status" to="/remote_server/galileo/status" />
+  </node>
   <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
   <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch" />
   <param name="xiaoqiang_logger_node/server_url" value="http://robot-log.bwbot.org" />
   <node pkg="system_monitor" type="system_logger_node.py" name="galileo_logger" respawn="true" respawn_delay="10"/>
-  <include file="$(find galileo_api)/launch/start.launch" />
+  <include file="$(find startup)/launch/galileo.launch" />
   <!-- <include file="$(find xiaoqiang_audio_controller)/launch/audio_controller.launch"/> -->
   <!-- <node pkg="nav_test" type="kinect_keepalive.py" name="kinect_keeplive"></node> -->
   <!-- <include file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" /> -->
