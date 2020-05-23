@@ -9,7 +9,7 @@
   <node pkg="topic_tools" type="relay" name="camera_node_info" args="/multi/front/camera_info /camera_node/camera_info" respawn="true" respawn_delay="10">
     <param name="lazy" value="true"/>
   </node>
-  <node pkg="rplidar_ros" type="node_controller.py" name="rplidar_node_manager" respawn="true" respawn_delay="10"/>
+  <node pkg="sc_mini" type="node_controller.py" name="scmini_node_manager" respawn="true" respawn_delay="10"/>
   <node pkg="system_monitor" type="monitor.py" name="system_monitor" respawn="true" respawn_delay="10">
     <remap from="/usb_cam" to="/multi/front" />
     <remap from="/usb_cam/camera_info" to="/multi/front/camera_info" />

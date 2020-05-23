@@ -12,7 +12,7 @@
 
 <launch>
 
-  <arg name="code_name" default="chitu3" />
+  <arg name="code_name" default="chitu3.5" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
   <param name="/galileo/battery_low" type="double" value="35.5" />
@@ -62,7 +62,7 @@
   <param name="/galileo/schedule_manager_ip" type="str" value="$(arg schedule_manager_ip)" />
   <param name="/galileo/schedule_manager_service_port" type="int" value="$(arg schedule_manager_service_port)" />
   <param name="/galileo/schedule_manager_port" type="int" value="$(arg schedule_manager_port)" />
-  
+
 
   <node
     pkg="galileo_api"
