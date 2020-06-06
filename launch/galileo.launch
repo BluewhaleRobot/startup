@@ -12,10 +12,10 @@
 
 <launch>
 
-  <arg name="code_name" default="tong" />
+  <arg name="code_name" default="tong_50" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
-  <param name="/galileo/battery_low" type="double" value="23" />
+  <param name="/galileo/battery_low" type="double" value="22" />
   <!-- battery high voltage -->
   <param name="/galileo/battery_high" type="double" value="28" />
   <!-- galileo api timeout in seconds -->
@@ -62,7 +62,7 @@
   <param name="/galileo/schedule_manager_ip" type="str" value="$(arg schedule_manager_ip)" />
   <param name="/galileo/schedule_manager_service_port" type="int" value="$(arg schedule_manager_service_port)" />
   <param name="/galileo/schedule_manager_port" type="int" value="$(arg schedule_manager_port)" />
-  
+
 
   <node
     pkg="galileo_api"
