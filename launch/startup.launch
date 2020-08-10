@@ -21,6 +21,7 @@
     <remap from="/usb_cam/camera_info" to="/multi/front/camera_info" />
     <remap from="/usb_cam/image_raw" to="/multi/front/image_raw" />
     <remap from="/xqserial_server" to="/motor_driver" />
+    <param name="useEnvSensors" value="1"/>
   </node>
   <node pkg="system_monitor" type="status_audio_reporter.py" name="audio_report" respawn="true" respawn_delay="10"/>
   <node pkg="system_monitor" type="time_tasks.py" name="time_task" respawn="true" respawn_delay="10"/>
@@ -31,6 +32,7 @@
     <remap from="/camera_node/image_raw" to="/multi/front/image_raw" />
   </node>
   <include file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch" />
+  <include file="$(find bw_env_sensors)/launch/bw_env_sensors.launch" />
   <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
   <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch" />
   <param name="xiaoqiang_logger_node/server_url" value="http://robot-log.bwbot.org" />
