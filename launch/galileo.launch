@@ -5,19 +5,19 @@
 @Project: galileo
 @Last modified by:   randoms
 @Last modified time: 2017-08-31
-@Copyright: ? 2015-2019 Blue Whale Technology all rights reserved
+@Copyright: © 2015-2019 Blue Whale Technology all rights reserved
 -->
 
 
 
 <launch>
 
-  <arg name="code_name" default="chitu3" />
+  <arg name="code_name" default="chitu3-yiyuan" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
   <param name="/galileo/battery_low" type="double" value="35.5" />
   <!-- battery high voltage -->
-  <param name="/galileo/battery_high" type="double" value="40.5" />
+  <param name="/galileo/battery_high" type="double" value="41" />
   <!-- galileo api timeout in seconds -->
   <param name="/galileo/timeout" type="int" value="20" />
   <!-- galileo service udp broadcast port -->
