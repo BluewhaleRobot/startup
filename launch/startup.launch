@@ -9,7 +9,7 @@
   <node pkg="topic_tools" type="relay" name="camera_node_info" args="/multi/front/camera_info /camera_node/camera_info" respawn="true" respawn_delay="10">
     <param name="lazy" value="true"/>
   </node>
-  <node pkg="sc_mini" type="node_controller.py" name="scmini_node_manager" respawn="true" respawn_delay="10"/>
+  <node pkg="rplidar_ros" type="node_controller.py" name="rplidar_node_manager" respawn="true" respawn_delay="10"/>
   <node pkg="system_monitor" type="monitor.py" name="system_monitor" respawn="true" respawn_delay="10">
     <remap from="/usb_cam" to="/multi/front" />
     <remap from="/usb_cam/camera_info" to="/multi/front/camera_info" />
@@ -38,6 +38,7 @@
   <include file="$(find xiaoqiang_greeting)/launch/xiaoqiang_greeting.launch" />
   <!-- <node pkg="system_monitor" type="iot_client.py" name="iot_client" respawn="true" respawn_delay="10" output="screen" /> -->
   <include file="$(find startup)/launch/galileo.launch" />
+  <include file="$(find nmea_navsat_driver)/launch/nmea_serial_driver.launch" />
   <!-- <include file="$(find xiaoqiang_audio_controller)/launch/audio_controller.launch"/> -->
   <!-- <node pkg="nav_test" type="kinect_keepalive.py" name="kinect_keeplive"></node> -->
   <!-- <include file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" /> -->
