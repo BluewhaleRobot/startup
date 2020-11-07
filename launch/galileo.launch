@@ -12,7 +12,7 @@
 
 <launch>
 
-  <arg name="code_name" default="xq5" />
+  <arg name="code_name" default="dilu" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
   <param name="/galileo/battery_low" type="double" value="35" />
