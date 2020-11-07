@@ -36,7 +36,7 @@
   <node pkg="system_monitor" type="system_logger_node.py" name="galileo_logger" respawn="true" respawn_delay="10"/>
   <include file="$(find xiaoqiang_greeting)/launch/xiaoqiang_greeting.launch" />
   <!-- <node pkg="system_monitor" type="iot_client.py" name="iot_client" respawn="true" respawn_delay="10" output="screen" /> -->
-  <include file="$(find galileo_api)/launch/start.launch" />
+  <include file="$(find startup)/launch/galileo.launch" />
   <!-- <include file="$(find xiaoqiang_audio_controller)/launch/audio_controller.launch"/> -->
   <!-- <node pkg="nav_test" type="kinect_keepalive.py" name="kinect_keeplive"></node> -->
   <!-- <include file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" /> -->
