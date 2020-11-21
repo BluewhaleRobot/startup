@@ -12,12 +12,12 @@
 
 <launch>
 
-  <arg name="code_name" default="chitu3.6" />
+  <arg name="code_name" default="4wd_mini" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
-  <param name="/galileo/battery_low" type="double" value="35.5" />
+  <param name="/galileo/battery_low" type="double" value="47." />
   <!-- battery high voltage -->
-  <param name="/galileo/battery_high" type="double" value="40.5" />
+  <param name="/galileo/battery_high" type="double" value="54." />
   <!-- galileo api timeout in seconds -->
   <param name="/galileo/timeout" type="int" value="20" />
   <!-- galileo service udp broadcast port -->
