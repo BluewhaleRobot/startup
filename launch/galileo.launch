@@ -12,7 +12,7 @@
 
 <launch>
 
-  <arg name="code_name" default="4wd_mini" />
+  <arg name="code_name" default="4wd_fuda" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
   <param name="/galileo/battery_low" type="double" value="47." />
