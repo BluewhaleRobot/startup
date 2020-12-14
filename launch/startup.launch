@@ -25,6 +25,7 @@
   <!-- <include file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch" /> -->
   <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
   <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch" />
+  <include file="$(find galileo_data_display)/launch/start.launch" />
   <param name="xiaoqiang_logger_node/server_url" value="http://robot-log.bwbot.org" />
   <node pkg="system_monitor" type="system_logger_node.py" name="galileo_logger" respawn="true" respawn_delay="10"/>
   <include file="$(find startup)/launch/galileo.launch" />
