@@ -12,12 +12,12 @@
 
 <launch>
 
-  <arg name="code_name" default="ugly_stereo" />
+  <arg name="code_name" default="agv_500" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
-  <param name="/galileo/battery_low" type="double" value="23" />
+  <param name="/galileo/battery_low" type="double" value="22.5" />
   <!-- battery high voltage -->
-  <param name="/galileo/battery_high" type="double" value="28" />
+  <param name="/galileo/battery_high" type="double" value="27" />
   <!-- galileo api timeout in seconds -->
   <param name="/galileo/timeout" type="int" value="20" />
   <!-- galileo service udp broadcast port -->
@@ -62,7 +62,7 @@
   <param name="/galileo/schedule_manager_ip" type="str" value="$(arg schedule_manager_ip)" />
   <param name="/galileo/schedule_manager_service_port" type="int" value="$(arg schedule_manager_service_port)" />
   <param name="/galileo/schedule_manager_port" type="int" value="$(arg schedule_manager_port)" />
-  
+
 
   <node
     pkg="galileo_api"
