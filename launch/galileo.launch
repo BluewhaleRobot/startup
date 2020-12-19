@@ -25,9 +25,13 @@
   <!-- image topic -->
   <arg name="galileo_image_topic" default="/camera_node/image_raw" doc="galileo image raw"/>
   <param name="/galileo/galileo_image_topic" type="string" value="$(arg galileo_image_topic)"/>
+  <arg name="galileo_image_info_topic" default="/camera_node/camera_info" doc="galileo image raw"/>
+  <param name="/galileo/galileo_image_info_topic" type="string" value="$(arg galileo_image_info_topic)"/>
   <!-- processed image topic -->
   <arg name="galileo_image_topic_processed" default="/ORB_SLAM/Frame" doc="galileo image processed"/>
   <param name="/galileo/galileo_image_topic_processed" type="string" value="$(arg galileo_image_topic_processed)"/>
+  <arg name="galileo_image_topic_processed_info" default="/ORB_SLAM/TrackingStatus" doc="galileo image processed"/>
+  <param name="/galileo/galileo_image_topic_processed_info" type="string" value="$(arg galileo_image_topic_processed_info)"/>
   <!-- mapping topic -->
   <arg name="galileo_mapping_topic" default="/map_image/full" doc="galileo map image"/>
   <param name="/galileo/galileo_mapping_topic" type="string" value="$(arg galileo_mapping_topic)"/>
@@ -72,12 +76,14 @@
     output="screen">
     <!-- basic video data input -->
     <remap from="/galileo/camera/image_raw" to="$(arg galileo_image_topic)" />
+    <remap from="/galileo/camera/camera_info" to="$(arg galileo_image_info_topic)" />
     <!-- processed video data input -->
     <remap from="/galileo/camera/processed" to="$(arg galileo_image_topic_processed)" />
+    <remap from="/galileo/camera/processed/info" to="$(arg galileo_image_topic_processed_info)" />
     <!-- robot battery voltage -->
     <remap from="/galileo/battery/power" to="/xqserial_server/Power" />
     <!-- basic depth video data input -->
-    <remap from="/galileo/camera/depth" to="/ORB_SLAM/Frame" />
+    <remap from="/galileo/camera/depth/info" to="$(arg galileo_image_topic_processed_info)" />
     <!-- imu odometry -->
     <remap from="/galileo/imu/odom" to="/xqserial_server/Odom" />
     <!-- imu position -->
