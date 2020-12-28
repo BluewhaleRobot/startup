@@ -10,7 +10,8 @@
     <param name="lazy" value="true"/>
   </node>
   <!-- <include file="$(find rplidar_ros)/launch/rplidar.launch" /> -->
-  <node pkg="rplidar_ros" type="node_controller.py" name="rplidar_node_manager" output="screen" respawn="true" respawn_delay="10" />
+  <!-- <node pkg="rplidar_ros" type="node_controller.py" name="rplidar_node_manager" output="screen" respawn="true" respawn_delay="10" /> -->
+  <node pkg="sc_mini" type="node_controller.py" name="scmini_node_manager" respawn="true" respawn_delay="10"/>
   <node pkg="system_monitor" type="monitor.py" name="system_monitor" respawn="true" respawn_delay="10">
     <remap from="/usb_cam" to="/multi/front" />
     <remap from="/usb_cam/camera_info" to="/multi/front/camera_info" />
