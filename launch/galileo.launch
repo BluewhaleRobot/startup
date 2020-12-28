@@ -12,7 +12,7 @@
 
 <launch>
 
-  <arg name="code_name" default="ugly_stereo2" />
+  <arg name="code_name" default="ugly_stereo_temp2" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
   <param name="/galileo/battery_low" type="double" value="23" />
