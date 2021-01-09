@@ -1,0 +1,11 @@
+galileo_api:
+  username: "admin"
+  password: "admin"
+
+iot:
+  use_iot: false
+  secret: Jbk3GLKIZYIRrTgthbAEa9TlXHdae5UL
+  password: xiaoqiang
+
+udp:
+  allow_local_only: false

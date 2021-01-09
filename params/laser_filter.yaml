@@ -1,0 +1,25 @@
+scan_filter_chain:
+# - name: shadows
+#   type: laser_filters/ScanShadowsFilter
+#   params:
+#     min_angle: 10
+#     max_angle: 170
+#     neighbors: 10
+#     window: 1
+# - name: angle
+#   type: laser_filters/LaserScanAngularBoundsFilterInPlace
+#   params:
+#     lower_angle: -0.6
+#     upper_angle: 0.6
+- name: footprint_filter
+  type: laser_filters/LaserScanFootprintFilter
+  params:
+    inscribed_radius: 0.05
+- name: range
+  type: laser_filters/LaserScanRangeFilter
+  params:
+    use_message_range_limits: false
+    lower_threshold: 0.2
+    upper_threshold: 25.0
+    lower_replacement_value: 0.2
+    upper_replacement_value: .inf

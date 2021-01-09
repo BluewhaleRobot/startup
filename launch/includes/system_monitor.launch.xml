@@ -1,0 +1,28 @@
+<launch>
+  <arg name="camera_type" default="mono" />
+  <arg name="camera_node_mono" value="$(eval 'camera_node' if camera_type == 'mono' else '')"/>
+  <arg name="camera_node_front" value="$(eval 'multi/front' if camera_type == 'front' else '')"/>
+  <arg name="camera_node_back" value="$(eval 'multi/back' if camera_type == 'back' else '')"/>
+  <arg name="camera_node_multi" value="$(eval 'multi/front' if camera_type == 'multi' else '')"/>
+  <arg name="camera_node" value="$(eval camera_node_mono + camera_node_front + camera_node_back + camera_node_multi)" />
+
+
+  <node pkg="system_monitor" type="monitor.py" name="system_monitor" respawn="true" respawn_delay="10">
+    <remap from="/usb_cam" to="/camera_node" />
+    <remap from="/usb_cam/camera_info" to="/$(arg camera_node)/camera_info" />
+    <remap from="/usb_cam/image_raw" to="/$(arg camera_node)/image_raw" />
+    <remap from="/xqserial_server" to="/motor_driver" />
+  </node>
+  <node pkg="system_monitor" type="remote_server.py" name="remote_server" respawn="false" respawn_delay="10" output="screen">
+    <remap from="/usb_cam" to="/camera_node" />
+    <remap from="/usb_cam/camera_info" to="/camera_node/camera_info" />
+    <remap from="/usb_cam/image_raw" to="/camera_node/image_raw" />
+    <remap from="/xqserial_server" to="/motor_driver" />
+  </node>
+  <node pkg="system_monitor" type="status_audio_reporter.py" name="audio_report" respawn="true" respawn_delay="10"/>
+  <node pkg="system_monitor" type="galileo_status_relay" name="galileo_status_relay" respawn="true" respawn_delay="10" output="screen">
+    <remap from="~galileo/status" to="/remote_server/galileo/status" />
+  </node>
+  <node pkg="system_monitor" type="time_tasks.py" name="time_task1" respawn="true" respawn_delay="10"/>
+  <node pkg="system_monitor" type="system_logger_node.py" name="galileo_logger" respawn="true" respawn_delay="10"/>
+</launch>

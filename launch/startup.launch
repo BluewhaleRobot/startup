@@ -1,35 +1,30 @@
 <launch>
-  <include file="$(find xiaoqiang_udrf)/launch/xiaoqiang_udrf.launch" />
-  <include file="$(find xqserial_server)/launch/xqserial.launch" />
-  <!-- <include file="$(find galileo_serial_server)/launch/galileo_serial_server.launch" /> -->
-  <include file="$(find usb_cam)/launch/ov2610.launch" />
-  <node pkg="system_monitor" type="monitor.py" name="system_monitor" respawn="true" respawn_delay="10">
-    <remap from="/usb_cam" to="/camera_node" />
-    <remap from="/usb_cam/camera_info" to="/camera_node/camera_info" />
-    <remap from="/usb_cam/image_raw" to="/camera_node/image_raw" />
-    <remap from="/xqserial_server" to="/motor_driver" />
-  </node>
-  <node pkg="system_monitor" type="remote_server.py" name="remote_server" respawn="true" respawn_delay="10" output="screen">
-    <remap from="/usb_cam" to="/camera_node" />
-    <remap from="/usb_cam/camera_info" to="/camera_node/camera_info" />
-    <remap from="/usb_cam/image_raw" to="/camera_node/image_raw" />
-    <remap from="/xqserial_server" to="/motor_driver" />
-    <param name="camera_type" value="mono" />
-  </node>
-  <node pkg="system_monitor" type="status_audio_reporter.py" name="audio_report" respawn="true" respawn_delay="10"/>
-  <node pkg="system_monitor" type="time_tasks.py" name="time_task" respawn="true" respawn_delay="10"/>
-  <node pkg="system_monitor" type="galileo_status_relay" name="galileo_status_relay" respawn="true" respawn_delay="10" output="screen">
-    <remap from="~galileo/status" to="/remote_server/galileo/status" />
-  </node>
-  <node pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true" respawn_delay="10" output="screen"></node>
-  <!-- <include file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch" /> -->
-  <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
-  <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch" />
-  <param name="xiaoqiang_logger_node/server_url" value="http://robot-log.bwbot.org" />
-  <node pkg="system_monitor" type="system_logger_node.py" name="galileo_logger" respawn="true" respawn_delay="10"/>
-  <include file="$(find startup)/launch/galileo.launch" />
-  <!-- <include file="$(find xiaoqiang_audio_controller)/launch/audio_controller.launch"/> -->
-  <!-- <node pkg="nav_test" type="kinect_keepalive.py" name="kinect_keeplive"></node> -->
-  <!-- <include file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" /> -->
-  <!-- <include file="$(find rplidar_ros)/launch/rplidar.launch" /> -->
+
+  <arg name="code_name" value="ugly-noetic" />
+  <arg name="battery_low" value="23" />
+  <arg name="battery_high" value="28" />
+  
+  <!-- 硬件配置 -->
+  <!-- 摄像头配置 -->
+  <arg name="use_camera" value="true"  doc="use camera or not" />
+  <arg name="camera_type" value="mono" doc="camera type, mono, front, back, multi" />
+  <!-- 雷达配置 -->
+  <arg name="use_lidar" value="true" doc="use lidar or node" />
+  <arg name="lidar_type" value="rplidar" doc="lidar type, rplidar, sc_mini" />
+  <arg name="use_lidar_manager" value="true" doc="use lidar manager or not" />
+  <!-- 雷达到baselink的tf关系-->
+  <arg name="laser_tf" value="0.1 0 0.15 3.1415926 0 0" />
+  <!-- 是否启用物联网 -->
+  <arg name="use_iot" value="false" />
+  <!-- 是否启用自动充电 -->
+  <arg name="use_auto_charge" value="false" />
+  <!-- 是否启用伽利略串口服务 -->
+  <arg name="use_galileo_serial" value="false" />
+  <!-- 是否使用手柄 -->
+  <arg name="use_joystick" value="false" />
+
+  <include 
+    file="$(find startup)/launch/includes/start_robot.launch.xml"
+    pass_all_args="true"
+  />
 </launch>

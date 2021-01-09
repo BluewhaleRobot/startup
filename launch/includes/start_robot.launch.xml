@@ -1,0 +1,95 @@
+<launch>
+  <!-- 硬件配置 -->
+  <!-- 摄像头配置 -->
+  <arg name="use_camera" default="false"  doc="use camera or not"/>
+  <arg name="camera_type" default="mono" doc="camera type, mono, front, back, multi"/>
+  <!-- 雷达配置 -->
+  <arg name="use_lidar" default="false" doc="use lidar or node" />
+  <arg name="lidar_type" default="rplidar" doc="lidar type, rplidar, sc_mini" />
+  <arg name="use_lidar_manager" default="false" doc="use lidar manager or not" />
+  <!-- 是否启用物联网 -->
+  <arg name="use_iot" default="false" />
+  <!-- 是否启用自动充电 -->
+  <arg name="use_auto_charge" default="false" />
+  <!-- 是否启用伽利略串口服务 -->
+  <arg name="use_galileo_serial" default="false" />
+
+  <!--/////////////////////////////////////////////////////////////////////////-->
+
+  <!-- 根据配置启动相关节点 -->
+  <include file="$(find xiaoqiang_udrf)/launch/xiaoqiang_udrf.launch" />
+  <include file="$(find xqserial_server)/launch/xqserial.launch" />
+  <include 
+    file="$(find galileo_serial_server)/launch/galileo_serial_server.launch"
+    if="$(eval use_galileo_serial)"
+  />
+
+  <!-- 摄像头相关配置 -->
+  <include 
+    file="$(find usb_cam)/launch/ov2610.launch" 
+    if="$(eval use_camera and camera_type == 'mono')"
+  />
+  <include 
+    file="$(find usb_cam)/launch/multi.launch" 
+    if="$(eval use_camera and camera_type != 'mono')"
+  />
+
+  <!-- 雷达相关配置 -->
+  <include
+    file="$(find rplidar)/launch/includes/rplidar.launch" 
+    if="$(eval use_lidar and lidar_type == 'rplidar' and not use_lidar_manager)"
+  />
+
+  <node 
+    pkg="rplidar_ros" type="node_controller.py"
+    name="rplidar_node_manager" output="screen"
+    respawn="true" respawn_delay="10" 
+    if="$(eval use_lidar and lidar_type == 'rplidar' and use_lidar_manager)" >
+    <param name="launch_path" value="$(find rplidar_ros)/launch/rplidar.launch" />
+  </node>
+
+  <node
+    pkg="sc_mini" type="node_controller.py"
+    name="sc_mini_node_manager" output="screen"
+    respawn="true" respawn_delay="10" 
+    if="$(eval use_lidar and lidar_type == 'sc_mini' and use_lidar_manager)" >
+    <param name="launch_path" value="$(find sc_mini)/launch/sc_mini.launch" />
+  </node>
+
+  <!-- 雷达tf -->
+  <node pkg="tf" type="static_transform_publisher"
+    name="laserlink_broadcaster" args="$(arg laser_tf) base_link laser 100"
+    if="$(eval use_lidar)"
+  />
+  <!-- laser filter -->
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain"
+    output="screen" name="laser_filter"
+    if="$(eval use_lidar)">
+      <rosparam command="load" file="$(find startup)/params/laser_filter.yaml" />
+  </node>
+
+  <include file="$(find startup)/launch/includes/system_monitor.launch.xml">
+    <arg name="camera_type" value="$(arg camera_type)" />
+  </include>
+
+  <node pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true" respawn_delay="10"></node>
+  <include 
+    file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch"
+    if="$(eval use_auto_charge)"
+  />
+  <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
+  <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch">
+    <arg name="server_url" value="http://robot-log.bwbot.org" />
+  </include>
+  <include file="$(find galileo_data_display)/launch/start.launch" />
+  <include file="$(find xiaoqiang_greeting)/launch/xiaoqiang_greeting.launch" />
+  <include file="$(find galileo_api)/launch/start.launch">
+    <arg name="code_name" value="$(arg code_name)" />
+    <arg name="battery_low" value="$(arg battery_low)" />
+    <arg name="battery_high" value="$(arg battery_high)" />
+  </include>
+  <include
+    file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" 
+    if="$(eval use_joystick)"
+  />
+</launch>
