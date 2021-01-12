@@ -1,0 +1,12 @@
+<launch>
+    <arg name="tf_setting" default="$(find startup)/params/orb_slam2/tf_setting.yaml" />
+    <arg name="camera_type" default="mono" />
+    <arg name="setting_file" default="$(find startup)/params/orb_slam2/setting.yaml" />
+    <include file="$(find ORB_SLAM2)/launch/update.launch">
+        <arg name="use_custom_tf" value="true" />
+        <arg name="tf_setting" value="$(arg tf_setting)" />
+        <arg name="use_custom_setting" value="true" />
+        <arg name="setting_file" value="$(arg setting_file)" />
+        <arg name="camera_type" value="$(arg camera_type)" />
+    </include>
+</launch>

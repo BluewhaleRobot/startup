@@ -9,3 +9,19 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(
 )
+
+message("Init tf config ...")
+execute_process(
+  COMMAND "${PROJECT_SOURCE_DIR}/script/init.sh"
+  OUTPUT_VARIABLE output
+  ERROR_VARIABLE error
+  RESULT_VARIABLE result
+)
+
+if("${result}" STREQUAL "0")
+  message("${output}")
+  message("Init tf config success")
+else()
+  message("${error}")
+  message(FATAL_ERROR "Init tf config failed")
+endif()
