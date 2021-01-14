@@ -12,12 +12,12 @@
 
 <launch>
 
-  <arg name="code_name" default="uwt-test2" />
+  <arg name="code_name" default="ugly_stereo2" />
   <param name="/galileo/code_name" value="$(arg code_name)" />
   <!-- battery low voltage, used to calculate battery percentage -->
-  <param name="/galileo/battery_low" type="double" value="21" />
+  <param name="/galileo/battery_low" type="double" value="23" />
   <!-- battery high voltage -->
-  <param name="/galileo/battery_high" type="double" value="25.5" />
+  <param name="/galileo/battery_high" type="double" value="28" />
   <!-- galileo api timeout in seconds -->
   <param name="/galileo/timeout" type="int" value="20" />
   <!-- galileo service udp broadcast port -->
