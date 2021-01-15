@@ -12,7 +12,7 @@ catkin_package(
 
 message("Init tf config ...")
 execute_process(
-  COMMAND "${PROJECT_SOURCE_DIR}/script/init.sh"
+  COMMAND "${PROJECT_SOURCE_DIR}/scripts/init.sh"
   OUTPUT_VARIABLE output
   ERROR_VARIABLE error
   RESULT_VARIABLE result
