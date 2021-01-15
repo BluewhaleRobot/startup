@@ -1,23 +1,23 @@
 <launch>
 
-  <arg name="code_name" value="ugly-noetic" />
-  <arg name="battery_low" value="23" />
-  <arg name="battery_high" value="28" />
+  <arg name="code_name" value="chitu-noetic" />
+  <arg name="battery_low" value="35.5" />
+  <arg name="battery_high" value="40.5" />
   
   <!-- 硬件配置 -->
   <!-- 摄像头配置 -->
   <arg name="use_camera" value="true"  doc="use camera or not" />
-  <arg name="camera_type" value="mono" doc="camera type, mono, front, back, multi" />
+  <arg name="camera_type" value="multi" doc="camera type, mono, front, back, multi" />
   <!-- 雷达配置 -->
   <arg name="use_lidar" value="true" doc="use lidar or node" />
   <arg name="lidar_type" value="rplidar" doc="lidar type, rplidar, sc_mini" />
   <arg name="use_lidar_manager" value="true" doc="use lidar manager or not" />
   <!-- 雷达到baselink的tf关系-->
-  <arg name="laser_tf" value="0.1 0 0.15 3.1415926 0 0" />
+  <arg name="laser_tf" value="0.18 0 0.15 3.1415926 0 0" />
   <!-- 是否启用物联网 -->
   <arg name="use_iot" value="false" />
   <!-- 是否启用自动充电 -->
-  <arg name="use_auto_charge" value="false" />
+  <arg name="use_auto_charge" value="true" />
   <!-- 是否启用伽利略串口服务 -->
   <arg name="use_galileo_serial" value="false" />
   <!-- 是否使用手柄 -->

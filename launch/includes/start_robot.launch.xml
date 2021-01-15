@@ -76,7 +76,14 @@
   <include 
     file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch"
     if="$(eval use_auto_charge)"
-  />
+  >
+    <arg name="back_distance" value="0.25" />
+    <arg name="back_distance2" value="0.25" />
+    <arg name="back_dock_kp" value="0.1" />
+    <arg name="crash_distance" value="120" />
+    <arg name="power_scale" value="1.00195" />
+    <arg name="power_threshold" value="$(arg battery_high)" />
+  </include>
   <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
   <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch">
     <arg name="server_url" value="http://robot-log.bwbot.org" />
