@@ -14,6 +14,7 @@
     <remap from="/xqserial_server" to="/motor_driver" />
   </node>
   <node pkg="system_monitor" type="remote_server.py" name="remote_server" respawn="false" respawn_delay="10" output="screen">
+    <param name="camera_type" value="$(arg camera_type)" />
     <remap from="/usb_cam" to="/camera_node" />
     <remap from="/usb_cam/camera_info" to="/camera_node/camera_info" />
     <remap from="/usb_cam/image_raw" to="/camera_node/image_raw" />

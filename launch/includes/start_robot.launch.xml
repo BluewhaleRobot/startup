@@ -34,6 +34,24 @@
     if="$(eval use_camera and camera_type != 'mono')"
   />
 
+  <node 
+    pkg="topic_tools" type="relay" name="camera_node" 
+    args="/multi/front/image_raw /camera_node/image_raw"
+    respawn="true" respawn_delay="10"
+    if="$(eval use_camera and camera_type != 'mono')"
+  >
+    <param name="lazy" value="true"/>
+  </node>
+
+  <node 
+    pkg="topic_tools" type="relay" name="camera_node_info"
+    args="/multi/front/camera_info /camera_node/camera_info"
+    respawn="true" respawn_delay="10"
+    if="$(eval use_camera and camera_type != 'mono')"
+  >
+    <param name="lazy" value="true"/>
+  </node>
+
   <!-- 雷达相关配置 -->
   <include
     file="$(find rplidar)/launch/includes/rplidar.launch" 
@@ -72,7 +90,10 @@
     <arg name="camera_type" value="$(arg camera_type)" />
   </include>
 
-  <node pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true" respawn_delay="10"></node>
+  <node pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true" respawn_delay="10">
+    <remap from="/camera_node/image_raw" to="/multi/front/image_raw" if="$(eval use_camera and camera_type != 'mono')" />
+  </node>
+
   <include 
     file="$(find bw_auto_dock)/launch/xiaoqiang_orb.launch"
     if="$(eval use_auto_charge)"
@@ -84,19 +105,26 @@
     <arg name="power_scale" value="1.00195" />
     <arg name="power_threshold" value="$(arg battery_high)" />
   </include>
+
   <include file="$(find xiaoqiang_tts)/launch/tts_xunfei.launch" />
+  
   <include file="$(find xiaoqiang_log)/launch/xiaoqiang_log.launch">
     <arg name="server_url" value="http://robot-log.bwbot.org" />
   </include>
+
   <include file="$(find galileo_data_display)/launch/start.launch" />
+
   <include file="$(find xiaoqiang_greeting)/launch/xiaoqiang_greeting.launch" />
+
   <include file="$(find galileo_api)/launch/start.launch">
     <arg name="code_name" value="$(arg code_name)" />
     <arg name="battery_low" value="$(arg battery_low)" />
     <arg name="battery_high" value="$(arg battery_high)" />
   </include>
+
   <include
     file="$(find turtlebot_teleop)/launch/ps3xiaoqiang_teleop.launch" 
     if="$(eval use_joystick)"
   />
+  
 </launch>
